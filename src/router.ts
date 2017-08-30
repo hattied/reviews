@@ -83,7 +83,7 @@ export class Router {
     // this.content.className = 'loading';
 
     let matches = this.routes.filter((route: Route): boolean => {
-      return route.url === (this.getCurrentUrl() === '' ? '/' : this.getCurrentUrl());
+      return this.removeSlashes(this.root + route.url) === this.getCurrentUrl();
     });
 
     if (matches.length === 1) {

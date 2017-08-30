@@ -57,7 +57,7 @@ const initiateRouter = async() => {
   router.getOrCreate(header, nav, content);
 
   router.addRoute({
-    url: '/',
+    url: '',
     name: 'Home',
     generator: async () => await populateTemplate(root.toString(), {})
   } as Route);

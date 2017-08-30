@@ -337,7 +337,7 @@ const initiateRouter = () => __awaiter(_this, void 0, void 0, function* () {
     });
     __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */].getOrCreate(header, nav, content);
     __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */].addRoute({
-        url: '/',
+        url: '',
         name: 'Home',
         generator: () => __awaiter(this, void 0, void 0, function* () {
             return yield Object(__WEBPACK_IMPORTED_MODULE_2__templatelib__["a" /* populateTemplate */])(__WEBPACK_IMPORTED_MODULE_3__templates_root_html__["toString"](), {});
@@ -1007,7 +1007,7 @@ class Router {
         this.generateContent = () => __awaiter(this, void 0, void 0, function* () {
             // this.content.className = 'loading';
             let matches = this.routes.filter(route => {
-                return route.url === (this.getCurrentUrl() === '' ? '/' : this.getCurrentUrl());
+                return this.removeSlashes(this.root + route.url) === this.getCurrentUrl();
             });
             if (matches.length === 1) {
                 try {
