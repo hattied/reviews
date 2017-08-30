@@ -973,7 +973,7 @@ class Router {
         this.getOrCreate = (headerElement, navElement, contentElement) => {
             if (!this.root) {
                 this.routes = [];
-                this.root = "/";
+                this.root = "/reviews/";
                 this.header = headerElement;
                 this.nav = navElement;
                 this.content = contentElement;

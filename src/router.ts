@@ -28,7 +28,7 @@ export class Router {
   public getOrCreate = (headerElement: HTMLLinkElement, navElement: HTMLElement, contentElement: HTMLElement): Router => {
     if (!this.root) {
       this.routes = [];
-      this.root = "/";
+      this.root = "/reviews/";
       this.header = headerElement;
       this.nav = navElement;
       this.content = contentElement;
