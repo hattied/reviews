@@ -1,0 +1,86 @@
+/* latin */
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Mono Light'), local('RobotoMono-Light'), url(https://fonts.gstatic.com/s/robotomono/v4/N4duVc9C58uwPiY8_59Fz9TIkQYohD4BpHvJ3NvbHoA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Mono Medium'), local('RobotoMono-Medium'), url(https://fonts.gstatic.com/s/robotomono/v4/N4duVc9C58uwPiY8_59Fz3JuJo8UJJfpGKt7pXjBv4s.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+body
+  font-weight 300
+  font-size 12px
+  font-family 'Roboto Mono', monospace
+
+a
+  color black
+
+h1
+  margin 1em 0 0.5em 0
+
+p
+  margin 0
+
+// main
+body
+  min-width 372px
+  display flex
+  flex-direction column
+  padding 1em
+
+body *
+  transition opacity 0.2s ease-in-out
+
+body > header#header
+  cursor pointer
+  font-weight 500
+  font-size 3em
+  margin 1em
+  text-align center
+  user-select: none
+
+body > nav
+  margin 1em
+  display flex
+  align-items center
+  justify-content center
+
+  div
+    cursor pointer
+    margin 0 1em
+    font-size 1.5em
+    text-decoration none
+    text-transform uppercase
+    user-select: none
+
+body > section
+  max-width 800px
+  margin 0 auto
+  width 100%
+
+  &.root
+    text-align justify
+
+  article
+    border-left 2px solid black
+    font-size 1.1em
+    &.review
+      margin 1em 0
+      padding 1em
+      header
+        font-weight 500
+        display flex
+        flex-direction row
+        div.rating
+          margin-left auto
+      main
+        margin 1em 0 0 0

@@ -1,0 +1,15 @@
+{
+  "title": "Alex's Reviews",
+  "modules": {
+    "Books": {
+      "enabled": true,
+      "json": "/reviews/books.json",
+      "route": "books"
+    },
+    "Places": {
+      "enabled": true,
+      "json": "/reviews/places.json",
+      "route": "places"
+    }
+  }
+}

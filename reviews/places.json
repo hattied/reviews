@@ -1,0 +1,27 @@
+[
+  {
+    "name": "La Choza",
+    "rating": "5",
+    "review": "",
+    "website": "http://lachoza.co.uk/",
+    "pros": ["large box", "good salsa, guac, sour cream", "plenty of cheese"],
+    "cons": "",
+
+    "price": "£8",
+    "address": "Brighton",
+    "food": ["large nachos w/ meat"],
+    "googlemaps": "bEd6xaos7L22"
+  },
+  {
+    "name": "Honest Burger",
+    "rating": "4",
+    "review": "",
+    "pros": ["delicious rosemary fries", "fresh", "barbecue", "cheap (for london)"],
+    "cons": ["limited outdoor seating"],
+
+    "price": "£16",
+    "address": "Soho",
+    "food": ["large fries", "5\" burger", "iced tea"],
+    "googlemaps": "a7cWYabsewN2"
+  }
+]
