@@ -6,6 +6,7 @@ const useCachedResults = false;
 const localApiDelay = 0;
 
 export interface Settings {
+  root: string;
   title: string;
   modules: Modules
 }

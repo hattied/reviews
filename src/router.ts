@@ -25,10 +25,10 @@ export class Router {
     }
   }
 
-  public getOrCreate = (headerElement: HTMLLinkElement, navElement: HTMLElement, contentElement: HTMLElement): Router => {
+  public getOrCreate = (headerElement: HTMLLinkElement, navElement: HTMLElement, contentElement: HTMLElement, root: string): Router => {
     if (!this.root) {
       this.routes = [];
-      this.root = "/reviews/";
+      this.root = root;
       this.header = headerElement;
       this.nav = navElement;
       this.content = contentElement;
@@ -60,7 +60,7 @@ export class Router {
   private generateHeader = async() => {
     const settings = (await apiManager.getSettings()).title;
     if (settings) this.header.innerText = settings;
-    this.header.onclick = () => this.routeTo(this.root);
+    this.header.onclick = () => this.routeTo('');
   };
 
   private generateNavBar = async() => {
@@ -71,6 +71,7 @@ export class Router {
       const navElement = document.createElement('div');
       navElement.innerHTML = route.name;
       navElement.onclick = () => {
+        console.log(route.url);
         this.routeTo(route.url);
       };
       nav.appendChild(navElement);
@@ -128,6 +129,7 @@ export class Router {
 
   public routeTo = (path: string) => {
     if (this.isRoute(path)) {
+      console.log(this.removeSlashes(this.root+path));
       history.pushState(null, path, this.root + this.removeSlashes(path));
 
       this.generateContent();

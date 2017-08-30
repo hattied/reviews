@@ -306,36 +306,37 @@ var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, gene
 let header = document.getElementById("header");
 let nav = document.getElementById("nav");
 let content = document.getElementById("content");
-const initiateRouter = () => __awaiter(_this, void 0, void 0, function* () {
-    const addRemainingRoutes = modules => __awaiter(this, void 0, void 0, function* () {
-        const enabledModules = Object.keys(modules).filter(moduleName => modules[moduleName].enabled).map(moduleName => {
-            modules[moduleName]['name'] = moduleName;
-            return modules[moduleName];
+const addRoutesForEnabledModules = modules => __awaiter(_this, void 0, void 0, function* () {
+    const enabledModules = Object.keys(modules).filter(moduleName => modules[moduleName].enabled).map(moduleName => {
+        modules[moduleName]['name'] = moduleName;
+        return modules[moduleName];
+    });
+    enabledModules.forEach(module => {
+        const generateHTMLForReviews = () => __awaiter(this, void 0, void 0, function* () {
+            const data = yield __WEBPACK_IMPORTED_MODULE_4__apimanager__["a" /* apiManager */].getReviewData(module.json);
+            let reviews;
+            if (module.name === 'Books') {
+                reviews = data.map(object => new __WEBPACK_IMPORTED_MODULE_5__objects_book__["a" /* Book */](object));
+            } else if (module.name === 'Places') {
+                reviews = data.map(object => new __WEBPACK_IMPORTED_MODULE_6__objects_place__["a" /* Place */](object));
+            } else {
+                reviews = [];
+            }
+            const htmlElements = yield Promise.all(reviews.map(review => {
+                return review.render();
+            }));
+            return [].concat(...htmlElements);
         });
-        enabledModules.forEach(module => {
-            const generator = () => __awaiter(this, void 0, void 0, function* () {
-                const data = yield __WEBPACK_IMPORTED_MODULE_4__apimanager__["a" /* apiManager */].getReviewData(module.json);
-                let reviews;
-                if (module.name === 'Books') {
-                    reviews = data.map(object => new __WEBPACK_IMPORTED_MODULE_5__objects_book__["a" /* Book */](object));
-                } else if (module.name === 'Places') {
-                    reviews = data.map(object => new __WEBPACK_IMPORTED_MODULE_6__objects_place__["a" /* Place */](object));
-                } else {
-                    reviews = [];
-                }
-                const htmlElements = yield Promise.all(reviews.map(review => {
-                    return review.render();
-                }));
-                return [].concat(...htmlElements);
-            });
-            __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */].addRoute({
-                url: module.route,
-                name: module.name,
-                generator
-            });
+        __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */].addRoute({
+            url: module.route,
+            name: module.name,
+            generator: generateHTMLForReviews
         });
     });
-    __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */].getOrCreate(header, nav, content);
+});
+const initiateRouter = () => __awaiter(_this, void 0, void 0, function* () {
+    const settings = yield __WEBPACK_IMPORTED_MODULE_4__apimanager__["a" /* apiManager */].getSettings();
+    __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */].getOrCreate(header, nav, content, settings.root);
     __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */].addRoute({
         url: '',
         name: 'Home',
@@ -343,7 +344,7 @@ const initiateRouter = () => __awaiter(_this, void 0, void 0, function* () {
             return yield Object(__WEBPACK_IMPORTED_MODULE_2__templatelib__["a" /* populateTemplate */])(__WEBPACK_IMPORTED_MODULE_3__templates_root_html__["toString"](), {});
         })
     });
-    yield addRemainingRoutes((yield __WEBPACK_IMPORTED_MODULE_4__apimanager__["a" /* apiManager */].getSettings()).modules);
+    yield addRoutesForEnabledModules(settings.modules);
     yield __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */].generatePage();
     document.getElementById('body').className = "";
 });
@@ -970,10 +971,10 @@ var ElementType;
 })(ElementType || (ElementType = {}));
 class Router {
     constructor() {
-        this.getOrCreate = (headerElement, navElement, contentElement) => {
+        this.getOrCreate = (headerElement, navElement, contentElement, root) => {
             if (!this.root) {
                 this.routes = [];
-                this.root = "/reviews/";
+                this.root = root;
                 this.header = headerElement;
                 this.nav = navElement;
                 this.content = contentElement;
@@ -989,7 +990,7 @@ class Router {
         this.generateHeader = () => __awaiter(this, void 0, void 0, function* () {
             const settings = (yield __WEBPACK_IMPORTED_MODULE_0__apimanager__["a" /* apiManager */].getSettings()).title;
             if (settings) this.header.innerText = settings;
-            this.header.onclick = () => this.routeTo(this.root);
+            this.header.onclick = () => this.routeTo('');
         });
         this.generateNavBar = () => __awaiter(this, void 0, void 0, function* () {
             const nav = document.createElement('nav');
@@ -998,6 +999,7 @@ class Router {
                 const navElement = document.createElement('div');
                 navElement.innerHTML = route.name;
                 navElement.onclick = () => {
+                    console.log(route.url);
                     this.routeTo(route.url);
                 };
                 nav.appendChild(navElement);
@@ -1036,6 +1038,7 @@ class Router {
         };
         this.routeTo = path => {
             if (this.isRoute(path)) {
+                console.log(this.removeSlashes(this.root + path));
                 history.pushState(null, path, this.root + this.removeSlashes(path));
                 this.generateContent();
             }
@@ -1071,7 +1074,7 @@ module.exports = {"publishers":["Prentice Hall"],"classifications":{},"key":"/bo
 /* 11 */
 /***/ (function(module, exports) {
 
-module.exports = {"title":"Alex's Reviews","modules":{"Books":{"enabled":true,"json":"/reviews/books.json","route":"books"},"Places":{"enabled":true,"json":"/reviews/places.json","route":"places"}}}
+module.exports = {"title":"Alex's Reviews","root":"/reviews/","modules":{"Books":{"enabled":true,"json":"/reviews/books.json","route":"books"},"Places":{"enabled":true,"json":"/reviews/places.json","route":"places"}}}
 
 /***/ }),
 /* 12 */

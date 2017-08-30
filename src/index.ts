@@ -12,9 +12,7 @@ let header = document.getElementById("header") as HTMLLinkElement;
 let nav = document.getElementById("nav") as HTMLElement;
 let content = document.getElementById("content") as HTMLElement;
 
-const initiateRouter = async() => {
-
-  const addRemainingRoutes = async(modules: Modules) => {
+const addRoutesForEnabledModules = async(modules: Modules) => {
     const enabledModules = Object.keys(modules)
       .filter((moduleName: string) => modules[moduleName].enabled)
       .map((moduleName: string) => {
@@ -24,7 +22,7 @@ const initiateRouter = async() => {
 
     enabledModules.forEach((module: Module) => {
 
-      const generator = async(): Promise<HTMLElement[]> => {
+      const generateHTMLForReviews = async(): Promise<HTMLElement[]> => {
         const data: IReview[] = await apiManager.getReviewData(module.json);
 
         let reviews: IReview[];
@@ -49,12 +47,16 @@ const initiateRouter = async() => {
       router.addRoute({
         url: module.route,
         name: module.name,
-        generator,
+        generator: generateHTMLForReviews,
       } as Route);
     })
   };
 
-  router.getOrCreate(header, nav, content);
+const initiateRouter = async() => {
+
+  const settings = await apiManager.getSettings();
+
+  router.getOrCreate(header, nav, content, settings.root);
 
   router.addRoute({
     url: '',
@@ -62,7 +64,7 @@ const initiateRouter = async() => {
     generator: async () => await populateTemplate(root.toString(), {})
   } as Route);
 
-  await addRemainingRoutes((await apiManager.getSettings()).modules);
+  await addRoutesForEnabledModules(settings.modules);
 
   await router.generatePage();
   document.getElementById('body')!.className = "";
