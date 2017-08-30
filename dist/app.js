@@ -149,10 +149,6 @@ const getDefaultValue = match => {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiManager; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dummy_book_json__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dummy_book_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__dummy_book_json__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__settings_json__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__settings_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__settings_json__);
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) {
@@ -177,17 +173,15 @@ var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, gene
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-
-
 const useCachedResults = false;
 const localApiDelay = 0;
 class ApiManager {
     constructor() {
         this.getSettings = () => __awaiter(this, void 0, void 0, function* () {
-            return yield this.getJsonFile('./settings.json', __WEBPACK_IMPORTED_MODULE_1__settings_json___default.a);
+            return yield this.getJsonFile('./settings.json');
         });
         this.getBookData = isbn => __awaiter(this, void 0, void 0, function* () {
-            return yield this.getJsonFromEndpoint(`https://openlibrary.org/isbn/${isbn}.json`, __WEBPACK_IMPORTED_MODULE_0__dummy_book_json___default.a);
+            return yield this.getJsonFromEndpoint(`https://openlibrary.org/isbn/${isbn}.json`);
         });
         /*
          Backend Functions
@@ -265,11 +259,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_main_styl___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_main_styl__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__templatelib__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__templates_root_html__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__templates_root_html__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__templates_root_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__templates_root_html__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__apimanager__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__objects_book__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__objects_place__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__objects_book__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__objects_place__ = __webpack_require__(13);
 var _this = this;
 
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
@@ -1068,26 +1062,14 @@ let router = new Router();
 /* 10 */
 /***/ (function(module, exports) {
 
-module.exports = {"publishers":["Prentice Hall"],"classifications":{},"key":"/books/OL26222911M","created":{"type":"/type/datetime","value":"2017-02-09T02:17:10.400677"},"title":"Clean Code","identifiers":{},"isbn_13":["978-0132350884"],"isbn_10":["0132350882"],"publish_date":"July 2008","last_modified":{"type":"/type/datetime","value":"2017-02-09T02:18:23.554296"},"ocaid":"CleanCode_201607","latest_revision":2,"works":[{"key":"/works/OL17618370W"}],"type":{"key":"/type/edition"},"revision":2}
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-module.exports = {"title":"Alex's Reviews","root":"/reviews/","modules":{"Books":{"enabled":true,"json":"/reviews/books.json","route":"books"},"Places":{"enabled":true,"json":"/reviews/places.json","route":"places"}}}
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
 module.exports = "<h1>Purpose</h1>\n<p>This is my page where I review bits and pieces that I enjoy. Feel free to read through my reviews. They\n    are mainly there to boost my own retention and make me remember my experiences.</p>\n\n<h1>Technology</h1>\n<p>This site was programmed over the course of 4 or 5 hours as a challenge to myself to create a json-powered and\n    routed review website without any clientside dependencies. It includes a (primitive) templating engine (using\n    the extremely cool Promise.all and a html5 history API compliant route manager as well. This creates a fast\n    (and simple) fetch API powered one page application. The styling used is intended to reflect that.</p>\n\n<h1>Source Code</h1>\n<p>If you'd like to read to source code (or host a copy of the site yourself) you can do so by downloading\n    the repo. It requires no server-side processing or database. It is all flat files and can be dropped into\n    the web folder and run immediately.</p>\n";
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__templates_book_html__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__templates_book_html__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__templates_book_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__templates_book_html__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__templatelib__ = __webpack_require__(0);
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
@@ -1135,17 +1117,17 @@ class Book {
 
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = "<article class=\"review book\">\n    <header>\n        ${name} - ${author}\n        <div class=\"rating\">${rating=no rating} out of 5</div>\n    </header>\n    <main>${review=no review}</main>\n</article>";
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__templates_place_html__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__templates_place_html__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__templates_place_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__templates_place_html__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__templatelib__ = __webpack_require__(0);
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
@@ -1196,7 +1178,7 @@ class Place {
 
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = "<article class=\"review place\">\n    <header>\n        <p><a href=\"${website=#}\">${name}</a> - <a href=\"https://goo.gl/maps/${googlemaps}\">${address}</a> - ${price=free?}</p>\n        <div class=\"rating\">${rating=no rating} out of 5</div>\n    </header>\n    <main>\n        <p><b>order:</b> ${food}</p>\n        <p><b>pros:</b> ${pros=none :(}</p>\n        <p><b>cons:</b> ${cons=none!}</p>\n        <p><b>review:</b> ${review=no clue}</p>\n    </main>\n</article>";

@@ -4,12 +4,12 @@
   "modules": {
     "Books": {
       "enabled": true,
-      "json": "/reviews/books.json",
+      "json": "reviews/books.json",
       "route": "books"
     },
     "Places": {
       "enabled": true,
-      "json": "/reviews/places.json",
+      "json": "reviews/places.json",
       "route": "places"
     }
   }

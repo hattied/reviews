@@ -1,5 +1,4 @@
-import dummyBook from './dummy/book.json';
-import dummySettings from '../settings.json';
+
 import { IReview } from "./objects/review";
 
 const useCachedResults = false;
@@ -38,7 +37,7 @@ interface ApiMethods {
 class ApiManager implements ApiMethods {
 
   getSettings = async(): Promise<Settings> => {
-    return await this.getJsonFile('./settings.json', dummySettings);
+    return await this.getJsonFile('./settings.json');
   };
 
   async getReviewData(endpoint: string): Promise<IReview[]> {
@@ -46,7 +45,7 @@ class ApiManager implements ApiMethods {
   }
 
   getBookData = async(isbn: string) => {
-    return await this.getJsonFromEndpoint(`https://openlibrary.org/isbn/${isbn}.json`, dummyBook) as OpenLibraryBook;
+    return await this.getJsonFromEndpoint(`https://openlibrary.org/isbn/${isbn}.json`) as OpenLibraryBook;
   };
 
   /*
@@ -75,7 +74,7 @@ class ApiManager implements ApiMethods {
     });
   };
 
-  private getJsonFromEndpoint = (endpointUrl: string, cachedResult: any): Promise<any> => {
+  private getJsonFromEndpoint = (endpointUrl: string, cachedResult?: any): Promise<any> => {
     return new Promise(returnResponse => {
       // check if we are needing local data
       if (useCachedResults) {
